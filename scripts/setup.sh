@@ -79,6 +79,7 @@ elif [ "$1" == "all" ]; then
     delete_manifests
     build_manifests
     add_host
+    k8s_scale_up
     rabbitmq
     tunnel
 elif [ "$1" == "tunnel" ]; then

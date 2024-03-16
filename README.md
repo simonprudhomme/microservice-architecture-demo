@@ -1,7 +1,13 @@
 # Microservice Achitecture
 
 ## Overview
-
+This project is a microservice architecture that includes the following services:
+- Auth, using JWT, Msyq
+- gateway
+- mongodb to store the files
+- converter, to convert the files
+- rabbitmq, message broker
+- notification, to send email
 
 ## Prerequisites
 ### Development/Python
@@ -16,9 +22,15 @@ source venv/bin/activate
 # install dependencies
 pip install -r requirements.txt
 ```
+
 ### MongoDB
 https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/
-!Important, create MongoDB Database [example](https://github.com/kantancoding/microservices-python/issues/21#issuecomment-1383206786)
+```bash
+# Install
+brew tap mongodb/brew
+brew install mongodb-community@7.0
+```
+Note: create MongoDB Database [example](https://github.com/kantancoding/microservices-python/issues/21#issuecomment-1383206786)
 
 
 ### MySQL
@@ -50,6 +62,7 @@ sudo bash -c 'echo "127.0.0.1       rabbitmq-manager.com" >> /etc/hosts'
 ```
 
 # K8s 
+```bash
 # Install
 brew install docker
 brew install kubectl
@@ -67,10 +80,14 @@ k9s
 minikube tunnel
 ```
 
-## See docker image;
+## See docker repository
 https://hub.docker.com/repository/docker/simonprudhomme/auth/general
 
 
+## Run the project
+```bash
+# To acquire the JWT token
 curl -X POST http://mp3converter.com/login -u simonprudhomme@gmail.com:admin
 
-curl -X POST -F 'file=@./test.mp4' -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InNpbW9ucHJ1ZGhvbW1lQGdtYWlsLmNvbSIsImV4cCI6MTcxMDE4NjMyMCwiaWF0IjoxNzEwMDk5OTIwLCJhZG1pbiI6dHJ1ZX0.DA-1pTaNkyZphbp24icEjrQvOQJDlaUgKN1xqyqZiag' http://mp3converter.com/upload
+# To upload a file
+curl -X POST -F 'file=@./test.mkv' -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InNpbW9ucHJ1ZGhvbW1lQGdtYWlsLmNvbSIsImV4cCI6MTcxMDYzODUzNCwiaWF0IjoxNzEwNTUyMTM0LCJhZG1pbiI6dHJ1ZX0.Vb0yYmDdaan641gguSrEMQryimLwi3NQ7QowzSB_GhQ' http://mp3converter.com/upload
